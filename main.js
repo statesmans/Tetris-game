@@ -111,14 +111,13 @@ var ctx = document.getElementById("tetro-block").getContext("2d");
 
 function renderTetroBottle() {
   document.getElementById("tetris-main").style.display = "flex";
-  document.body.style.alignItems = "center";
 
   for (Y = 0; Y < tetroBottle.length; Y++) {
     for (X = 0; X < tetroBottle[Y].length; X++) {
-      xAsix = X * 50;
-      yAsix = Y * 50;
+      xAsix = X * 30;
+      yAsix = Y * 30;
       ctx.beginPath();
-      ctx.rect(xAsix, yAsix, 50, 50);
+      ctx.rect(xAsix, yAsix, 30, 30);
       ctx.closePath();
       ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
       ctx.strokeStyle = "black";
@@ -126,8 +125,8 @@ function renderTetroBottle() {
       ctx.stroke();
 
       if (tetroBottle[Y][X] == 0) {
-        ctx.clearRect(xAsix, yAsix, 50, 50);
-        ctx.rect(xAsix, yAsix, 50, 50);
+        ctx.clearRect(xAsix, yAsix, 30, 30);
+        ctx.rect(xAsix, yAsix, 30, 30);
         ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
         ctx.strokeStyle = "black";
         ctx.fill();
@@ -158,13 +157,13 @@ function setNextTetro () {
       nextTetroCtx = document.getElementById("teris-preview").getContext('2d'),
       nextTetro = tetrominos[randomFigureLetter].slice()
 
-  for (Y = 0; Y < 5; Y++) {
+  for (Y = 0; Y < 4; Y++) {
     for (X = 0; X < 4; X++) {
-      xAsix = X * 50;
-      yAsix = Y * 50;
-      nextTetroCtx.clearRect(xAsix, yAsix, 50, 50)
+      xAsix = X * 40;
+      yAsix = Y * 40;
+      nextTetroCtx.clearRect(xAsix, yAsix, 40, 40)
       nextTetroCtx.beginPath();
-      nextTetroCtx.rect(xAsix, yAsix, 50, 50);
+      nextTetroCtx.rect(xAsix, yAsix, 40, 40);
       nextTetroCtx.closePath();
       nextTetroCtx.fillStyle = "rgba(255, 255, 255, 0.4)";
       nextTetroCtx.strokeStyle = "black";
@@ -277,7 +276,8 @@ function outOfLimit() {
         activeTetro.tetromino[Y][X] == 1&&
         (tetroBottle[activeTetro.Y + Y + 1] === undefined ||
          tetroBottle[activeTetro.Y + Y][activeTetro.X + X] === undefined ||
-         tetroBottle[activeTetro.Y + Y + 1][activeTetro.X + X] === 2 || tetroBottle[activeTetro.Y + Y][activeTetro.X + X + 1] === 2)
+         tetroBottle[activeTetro.Y + Y + 1][activeTetro.X + X] === 2)
+         
       ) {
         return true;
       }
@@ -324,7 +324,7 @@ let controlEvents = (e) => {
   // Move tetro to left
   if (e.keyCode == 65 || e.keyCode == 37) {
     activeTetro.X -= 1;
-    if (outOfLimit()) {
+    if (outOfLimit() || tetroBottle[activeTetro.Y + Y][activeTetro.X + X - 1] === 2) {
       activeTetro.X += 1;
     }
     renderActiveTetro()
@@ -334,7 +334,7 @@ let controlEvents = (e) => {
   // Move tetro to right
   if (e.keyCode == 68 || e.keyCode == 39) {
     activeTetro.X += 1;
-    if (outOfLimit()) {
+    if (outOfLimit() || tetroBottle[activeTetro.Y + Y][activeTetro.X + X + 1] === 2) {
       activeTetro.X -= 1;
     }
     renderActiveTetro()

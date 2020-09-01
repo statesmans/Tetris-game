@@ -6,8 +6,8 @@
 body {
     display: flex;
     justify-content: center;
+    height: 100vh;
     background: url('../img/rqucuvqfhw9bhjmuf9g2.jpeg') no-repeat center center / cover;
-    height: 940px;
 }
 
 input:focus {
@@ -16,7 +16,7 @@ input:focus {
 }
 
 .write-name {
-    margin-top: 280px;
+    margin-top: 169px;
 }
 
 .write-name__header {
@@ -75,23 +75,20 @@ input:focus {
 
 .tetris-main {
     display: none;
-    justify-content: flex-end;
-    width: 869px;
+    justify-content: space-around;
+    width: 100%;
+    padding: 50px;
 }
 
 .tetro-block {
-    width: 49%;
+    padding-left: 100px;
     border: 2px pink;
 }
 
-.tetris-preview {
-    margin-left: 100px;
-}
-
 .score {
-    margin: 0 0 100px 100px;
+    margin: 0 0 100px 0;
     height: 100px;
-    width: 180px;
+    width: 160px;
     border-radius: 3px;
     background-color: rgba(62, 135, 105, .9);
     padding: 10px;
@@ -100,13 +97,13 @@ input:focus {
 
 .score__number {
     padding-left: 7px;
-    font-size: 25px;
-
+    padding-top: 19px;
+    font-size: 22px;
 }
 
 .score__user-name {
     text-align: center;
-    font-size: 29px;
+    font-size: 24px;
 }
 
 .score-table {
