@@ -235,7 +235,7 @@ function renderActiveTetro() {
 }
 
 
-let scoreRemovedLine = 800;
+let scoreRemovedLine = 0;
 
 // Check full rows
 
@@ -277,7 +277,7 @@ function outOfLimit() {
         activeTetro.tetromino[Y][X] == 1&&
         (tetroBottle[activeTetro.Y + Y + 1] === undefined ||
          tetroBottle[activeTetro.Y + Y][activeTetro.X + X] === undefined ||
-         tetroBottle[activeTetro.Y + Y + 1][activeTetro.X + X] === 2)
+         tetroBottle[activeTetro.Y + Y + 1][activeTetro.X + X] === 2 || tetroBottle[activeTetro.Y + Y][activeTetro.X + X + 1] === 2)
       ) {
         return true;
       }
@@ -298,12 +298,6 @@ function forwardTetro() {
   renderActiveTetro()
   renderTetroBottle()
 }
-
-/*
-5. Если не будет впадлу, звуковое сопровождение
-*/
-
-
 
 function moveTetroDown() {
 
@@ -326,6 +320,8 @@ function moveTetroDown() {
 
 // Keyboard events
 let controlEvents = (e) => {
+  
+  // Move tetro to left
   if (e.keyCode == 65 || e.keyCode == 37) {
     activeTetro.X -= 1;
     if (outOfLimit()) {
@@ -333,35 +329,42 @@ let controlEvents = (e) => {
     }
     renderActiveTetro()
     renderTetroBottle()
-  } else if (e.keyCode == 68 || e.keyCode == 39) {
+  } else 
+
+  // Move tetro to right
+  if (e.keyCode == 68 || e.keyCode == 39) {
     activeTetro.X += 1;
     if (outOfLimit()) {
       activeTetro.X -= 1;
     }
     renderActiveTetro()
     renderTetroBottle()
-  } else if (e.keyCode == 83 || e.keyCode == 40) {
+  } else 
+
+  // Move tetro to down
+  if (e.keyCode == 83 || e.keyCode == 40) {
       window.requestAnimationFrame(moveTetroDown)
-  } else if (e.keyCode == 87 || e.keyCode == 38) {
+  } else 
+  
+  // Forward tetro
+  if (e.keyCode == 87 || e.keyCode == 38) {
     forwardTetro();
   }
 }
 
 
-
+// Game end check
 function endGame () {
   for (Y = 0; Y <= 2; Y++) {
     for (X = 0; X < tetroBottle[Y].length; X++) {
       if (tetroBottle[Y][X] === 2) {
-
         return true
-
       }
     }
   }
-
   return false
 }
+
 
 function getResult() {
   try {
@@ -398,8 +401,6 @@ function displayResult() {
     user.appendChild(document.createElement('div')).innerText = element.name
     user.appendChild(document.createElement('div')).innerText = element.score
   });
-  console.log(result)
-  /*  */
 }
 
 
@@ -413,6 +414,8 @@ function startGame() {
     addUserToResults(inputName.value, scoreRemovedLine)
     return cancelAnimationFrame(startGame)
   }
+
+  // Set speed of game
 
   switch(scoreRemovedLine) {
     case 700: framesToSkip = 50
@@ -437,11 +440,8 @@ function startGame() {
       return requestAnimationFrame(startGame); 
   }
 
-  
   moveTetroDown();
-
   counter = 0;
-
   requestAnimationFrame(startGame);
 }
 
