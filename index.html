@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="tetris-main" id="tetris-main">
+        <canvas class="tetro-block" id="tetro-block" width="400" height="800"></canvas>
+        <div class="tetris-aside">
+
+            <div class="tetris-main__score score">
+                <h2 class="score__user-name" id="score__user-name"></h2>
+                <p class="score__number">Score: <span id="score-count">0</span></p>
+            </div>
+            <canvas class="tetris-preview" id="teris-preview" height="200"></canvas>
+        </div>
+    </div>
+
+    <div class="write-name" id="write-name">
+        <h1 class="write-name__header">Enter name</h1>
+        <input class="input-name" id="input-name" type="text">
+        <p class="input-name__alert" id='input-name__alert'></p>
+        <p class="input-name__description">Press enter</p>
+    </div>
+
+    <div class="score-table" id="score-table">
+        <div class="user-info">
+            <h1>Your best score: </h1>
+
+            <div class="user">
+                <p class="username" id="username"></p>
+                <span class="user-score" id="user-score"></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+    <script src="main.js"></script>
+</html>
